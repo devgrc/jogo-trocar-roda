@@ -1,0 +1,232 @@
+         body {
+             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+             max-width: 650px;
+             margin: 0 auto;
+             padding: 20px;
+             background-color: #f5f9ff;
+             color: #333;
+         }
+
+         h1 {
+             color: #2c3e50;
+             text-align: center;
+             margin-bottom: 10px;
+         }
+
+         .game-container {
+             background-color: white;
+             border-radius: 12px;
+             padding: 25px;
+             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+         }
+
+         .game-header {
+             display: flex;
+             justify-content: space-between;
+             align-items: center;
+             margin-bottom: 15px;
+             flex-wrap: wrap;
+             gap: 10px;
+         }
+
+         .timer {
+             background-color: #e3f2fd;
+             padding: 8px 15px;
+             border-radius: 20px;
+             font-weight: bold;
+             color: #1976d2;
+         }
+
+         .difficulty-selector {
+             display: flex;
+             gap: 10px;
+             margin-bottom: 15px;
+             justify-content: center;
+         }
+
+         .difficulty-btn {
+             padding: 8px 15px;
+             background-color: #e0e0e0;
+             border: none;
+             border-radius: 20px;
+             cursor: pointer;
+             transition: all 0.3s;
+             font-weight: bold;
+         }
+
+         .difficulty-btn.active {
+             background-color: #4caf50;
+             color: white;
+         }
+
+         .instructions {
+             margin-bottom: 20px;
+             padding: 15px;
+             background-color: #e8f5e9;
+             border-radius: 8px;
+             text-align: center;
+             border-left: 4px solid #4caf50;
+         }
+
+         .steps-container {
+             display: flex;
+             flex-direction: column;
+             gap: 8px;
+             margin-bottom: 20px;
+             min-height: 200px;
+             transition: all 0.3s;
+         }
+
+         .step {
+             padding: 12px 15px;
+             background-color: #64b5f6;
+             color: white;
+             border-radius: 8px;
+             cursor: grab;
+             user-select: none;
+             transition: all 0.3s ease;
+             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+             position: relative;
+             overflow: hidden;
+         }
+
+         .step:hover {
+             background-color: #42a5f5;
+             transform: translateY(-2px);
+             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+         }
+
+         .step.dragging {
+             opacity: 0.8;
+             transform: scale(1.02);
+             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+             background-color: #1e88e5;
+         }
+
+         .step-placeholder {
+             border: 2px dashed #64b5f6;
+             background-color: rgba(100, 181, 246, 0.1);
+             border-radius: 8px;
+             margin: 5px 0;
+         }
+
+         .controls {
+             display: flex;
+             justify-content: center;
+             gap: 15px;
+             margin-top: 25px;
+             flex-wrap: wrap;
+         }
+
+         button {
+             padding: 10px 25px;
+             background-color: #66bb6a;
+             color: white;
+             border: none;
+             border-radius: 8px;
+             cursor: pointer;
+             font-size: 16px;
+             transition: all 0.3s;
+             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+             min-width: 120px;
+         }
+
+         button:hover {
+             background-color: #57a85a;
+             transform: translateY(-2px);
+             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+         }
+
+         button:active {
+             transform: translateY(0);
+         }
+
+         button:disabled {
+             background-color: #bdbdbd;
+             cursor: not-allowed;
+             transform: none;
+             box-shadow: none;
+         }
+
+         #hintButton {
+             background-color: #ffa726;
+         }
+
+         #hintButton:hover {
+             background-color: #fb8c00;
+         }
+
+         .feedback {
+             margin-top: 20px;
+             padding: 15px;
+             border-radius: 8px;
+             text-align: center;
+             font-weight: bold;
+             display: none;
+             animation: fadeIn 0.5s;
+         }
+
+         @keyframes fadeIn {
+             from {
+                 opacity: 0;
+                 transform: translateY(10px);
+             }
+
+             to {
+                 opacity: 1;
+                 transform: translateY(0);
+             }
+         }
+
+         @keyframes pulse {
+             0% {
+                 transform: scale(1);
+             }
+
+             50% {
+                 transform: scale(1.05);
+             }
+
+             100% {
+                 transform: scale(1);
+             }
+         }
+
+         @keyframes confetti {
+             0% {
+                 transform: translateY(0) rotate(0);
+                 opacity: 1;
+             }
+
+             100% {
+                 transform: translateY(-100px) rotate(360deg);
+                 opacity: 0;
+             }
+         }
+
+         .success {
+             background-color: #dcedc8;
+             color: #2e7d32;
+             border-left: 4px solid #2e7d32;
+         }
+
+         .error {
+             background-color: #ffebee;
+             color: #c62828;
+             border-left: 4px solid #c62828;
+         }
+
+         .confetti {
+             position: absolute;
+             width: 10px;
+             height: 10px;
+             background-color: #f44336;
+             opacity: 0;
+             animation: confetti 2s ease-out;
+         }
+
+         .hint-active {
+             animation: pulse 1s infinite;
+             background-color: #fff176;
+             color: #5d4037;
+         }

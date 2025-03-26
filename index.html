@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo Completo - Troca de Roda</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="game-container">
+        <div class="game-header">
+            <h1>Troca de Roda do Carro</h1>
+            <div class="timer" id="timer">00:00</div>
+        </div>
+        
+        <div class="difficulty-selector">
+            <button class="difficulty-btn active" data-level="easy">Fácil</button>
+            <button class="difficulty-btn" data-level="medium">Médio</button>
+            <button class="difficulty-btn" data-level="hard">Difícil</button>
+        </div>
+        
+        <div class="instructions">
+            <p>Ordene os passos na sequência correta para trocar uma roda de carro</p>
+        </div>
+        
+        <div class="steps-container" id="stepsContainer">
+            <!-- Passos serão inseridos aqui via JavaScript -->
+        </div>
+        
+        <div class="controls">
+            <button id="checkButton">Verificar</button>
+            <button id="hintButton">Dica (3)</button>
+            <button id="resetButton">Reiniciar</button>
+        </div>
+        
+        <div class="feedback" id="feedback"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
