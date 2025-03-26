@@ -20,12 +20,12 @@ document.addEventListener('DOMContentLoaded', function() {
             "Aperte os parafusos com a mão.",
             "Abaixe o carro e finalize apertando os parafusos com força.",
             "Guarde a roda furada e os equipamentos.",
-            "Recolha o triângulo de segurança e continue sua viagem."
+            "Verifique a pressão do estepe e continue sua viagem."
         ],
         hard: [
             "Estacione o carro em local seguro e plano, acione o freio de mão",
             "Coloque o triângulo de segurança a uma distância adequada do veículo",
-            "Pegue o estepe e as ferramentas do porta-malas",
+            "Remova o estepe e as ferramentas do porta-malas",
             "Afrouxe ligeiramente os parafusos da roda (sem retirá-los completamente)",
             "Posicione o macaco no local indicado pelo manual do veículo",
             "Levante o carro com o macaco até a roda ficar suspensa",
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
             "Abaixe o carro com o macaco até o estepe tocar o chão",
             "Aperte os parafusos com a chave em formato de estrela (cruzeta)",
             "Guarde a roda furada e as ferramentas no porta-malas",
-            "Recolha o triângulo de segurança e continue sua viagem."
+            "Leve a roda furada para reparo ou substituição"
         ]
     };
     
@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Limpar o container
         stepsContainer.innerHTML = '';
         
-        // Adicionar os passos embaralhados
+        // Adicionar os passos embaralhados ao container
         shuffledSteps.forEach(step => {
             const stepElement = document.createElement('div');
             stepElement.className = 'step';
@@ -109,6 +109,9 @@ document.addEventListener('DOMContentLoaded', function() {
         stepsContainer.addEventListener('dragenter', dragEnter);
         stepsContainer.addEventListener('dragleave', dragLeave);
         
+        // Verificar posições corretas inicialmente
+        checkCorrectPositions();
+        
         // Resetar feedback
         feedback.style.display = 'none';
         
@@ -123,6 +126,20 @@ document.addEventListener('DOMContentLoaded', function() {
         timerInterval = setInterval(updateTimer, 1000);
         
         gameActive = true;
+    }
+    
+    // Verificar posições corretas
+    function checkCorrectPositions() {
+        const currentOrder = [...stepsContainer.querySelectorAll('.step')].map(el => el.dataset.step);
+        
+        currentOrder.forEach((step, index) => {
+            const stepElement = stepsContainer.children[index];
+            if (step === correctSteps[index]) {
+                stepElement.classList.add('correct');
+            } else {
+                stepElement.classList.remove('correct');
+            }
+        });
     }
     
     // Atualizar o timer
@@ -156,6 +173,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function dragEnd() {
         this.classList.remove('dragging');
         placeholder.remove();
+        checkCorrectPositions(); // Verificar posições após soltar
     }
     
     function dragOver(e) {
@@ -203,7 +221,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }, { offset: Number.NEGATIVE_INFINITY }).element;
     }
     
-    // Verificar resposta
+    // Verificar resposta completa
     function checkAnswer() {
         if (!gameActive) return;
         
@@ -223,17 +241,6 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Efeito de confete
             createConfetti();
-            
-            // Efeito de onda verde
-            stepsContainer.querySelectorAll('.step').forEach((step, i) => {
-                setTimeout(() => {
-                    step.style.transform = 'scale(1.05)';
-                    step.style.backgroundColor = '#66bb6a';
-                    setTimeout(() => {
-                        step.style.transform = '';
-                    }, 300);
-                }, i * 100);
-            });
             
             // Desabilitar botão de dica
             hintButton.disabled = true;
